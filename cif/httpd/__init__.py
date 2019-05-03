@@ -54,6 +54,9 @@ HTTPD_UI_HOSTS = HTTPD_UI_HOSTS.split(',')
 
 HTTPD_PROXY = os.getenv('CIF_HTTPD_PROXY')
 
+KIBANA_HOST = os.getenv('KIBANA_HOSTNAME', '127.0.0.1')
+
+
 extra_dirs = ['cif/httpd/templates', ]
 extra_files = extra_dirs[:]
 for extra_dir in extra_dirs:
@@ -242,7 +245,7 @@ def login():
 @app.route('/u/dashboard', methods=['GET'])
 def dashboard():
     if request.method == 'GET':
-        return render_template('dashboard.html')
+        return render_template('dashboard.html', kibana=KIBANA_HOST)
 
 
 @app.route('/u/logout')
